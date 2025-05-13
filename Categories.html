@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <title>Categories</title>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Limelight&family=Passion+One:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Limelight&family=Passion+One:wght@400;700;900&display=swap" rel="stylesheet">
+ <style>
+    body{
+            background-color: #fdb2b7;
+            color: rgb(0, 0, 0);
+        }
+        .card{
+            background-color: #ffffff;
+            font-family: "Passion One", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            padding: 40px;
+            border: #ffffff;
+        }
+    .navbar{
+            padding: 12px;
+            background-color: #d3545d;
+            font-family: "Limelight", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+    .navbar-brand{
+          font-size: 42px;
+        }
+        .nav-item{
+          padding-left: 12px;
+        }
+    .form-label{
+        font-family: "Passion One", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 20px;
+    }
+    .card-header{
+        font-size: 20px;
+    }
+    .dropdown-toggle{
+        color: white;
+    }
+ </style>
+</head>
+<body>
+ <nav class="navbar navbar-expand-lg">
+     <a class="navbar-brand" href="Sakura_Home Page.html" style="color: #ffffff;">Sakura</a>
+     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+       <span class="navbar-toggler-icon"></span>
+     </button>
+     <div class="collapse navbar-collapse" id="navbarNav">
+       <ul class="navbar-nav me-auto">
+         <li class="nav-item dropdown">
+           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Categories</a>
+           <ul class="dropdown-menu">
+             <li><a class="dropdown-item category-link" href="Categories.html" data-category="Shoulder Bag">Shoulder Bag</a></li>
+             <li><a class="dropdown-item category-link" href="Categories.html" data-category="Luggage">Luggage</a></li>
+             <li><a class="dropdown-item category-link" href="Categories.html" data-category="Handbag">Handbag</a></li>
+             <li><a class="dropdown-item category-link" href="Categories.html" data-category="Backpack">Backpack</a></li>
+             <li><a class="dropdown-item category-link" href="Categories.html" data-category="Tote Bag">Tote Bag</a></li>
+           </ul>
+           <li class="nav-item">
+            <a class="nav-link active" href="About the Company.html" style="font-weight: 400; color: #ffffff;">About the Company</a>
+            </li>
+         </li>
+       </ul>
+       <form class="d-flex" role="search">
+        <input class="form-control me-2 roboto" type="search" placeholder="Search" aria-label="Search"/>
+        <button class="btn btn-light roboto" type="submit" style="font-size: medium;">Search</button>
+      </form>
+     </div>
+   </div>
+ </nav>
+
+
+ <div class="container mt-4">
+   <div class="row">
+     <div class="col-lg-12">
+       <h2 id="categtitle">Products</h2>
+       <div class="row" id="prodli"></div>
+     </div>
+
+
+     <div class="col-lg-6">
+       <div class="card mb-4">
+         <div class="card-header">Shopping Cart</div>
+         <div class="card-body">
+           <div id="cartitems"></div>
+           <p><strong>Total: ₱<span id="tot">0</span></strong></p>
+    
+         </div>
+       </div>
+     </div>
+     <div class="col-lg-6">
+       <form method="post" action="http://47.129.9.35/cs3/checkout.php" onsubmit="return checkout()">
+             <div class="mb-3">
+               <label class="form-label">Name</label>
+               <input type="text" class="form-control" id="cust_name" name="cust_name"  />
+             </div>
+             <div class="mb-3">
+               <label class="form-label">Address</label>
+               <input type="text" class="form-control" id="cust_addr" name="cust_addr"  />
+             </div>
+             <div class="mb-3">
+               <label class="form-label">Email</label>
+               <input type="text" class="form-control" id="cust_email" name="cust_email"  />
+             </div>
+             <input type="hidden" name="cust_order" id="cust_order"/>
+             <button type="submit" class="btn btn-primary">Place Order</button>
+           </form>
+     </div>
+    
+   </div>
+ </div>
+
+
+<script>
+ const allProducts = {
+   "Shoulder Bag": [
+     { name: "Classic Shoulder Bag", price: 3500, image: "https://i.pinimg.com/736x/33/14/73/33147343c12c304e429e18f5c4144083.jpg" },
+     { name: "Leather Shoulder Bag", price: 7000, image: "https://i.pinimg.com/736x/76/6c/69/766c69a4ce577681ecf548bfbf1f91b1.jpg" },
+     { name: "Canvas Shoulder Bag", price: 4500, image: "https://i.pinimg.com/736x/94/82/15/9482157766a597e785db4ffb7e6303e7.jpg" },
+     { name: "Mini Shoulder Bag", price: 5000, image: "https://i.pinimg.com/736x/1c/e0/17/1ce017b173e4588968e7fe02ee5b801f.jpg" },
+     { name: "Striped Shoulder Bag", price: 4500, image:"https://i.pinimg.com/736x/38/06/c6/3806c6390072a6b65d601ae0391e255c.jpg" }
+   ],
+   "Luggage": [
+     { name: "Medium-Sized Luggage (Black)", price: 16000, image: "https://www.americantourister.com.ph/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dwa2d0d08a/images/curio-spinner-tsa-v1/hi-res/132685_1041_hi-res_FRONT34_1.jpg" },
+     { name: "Set of 3 (Black)", price: 25300, image: "https://www.americantourister.com.ph/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dwb1e65caa/images/upland-3p-set-a/hi-res/125946_1041_hi-res_FRONT34_1.jpg" },
+     { name: "Medium-Sized Luggage (Dark Purple)", price: 100, image: "https://shop.samsonite.com/dw/image/v2/BBZB_PRD/on/demandware.static/-/Sites-product-catalog/default/dw1c1612e5/collections/_samsonite/freeform/500x500/78256B170_24Spin_Front34.jpg" },
+     { name: "Small-sized Luggage (Black)", price: 70, image: "https://shop.samsonite.com/dw/image/v2/BBZB_PRD/on/demandware.static/-/Sites-product-catalog/default/dweb728216/collections/_samsonite/silhouette-18/500x500/153638-1041-FRONT34.jpg" },
+     { name: "Set of 2 (Sky Blue)", price: 60, image: "https://shop.samsonite.com/dw/image/v2/BBZB_PRD/on/demandware.static/-/Sites-product-catalog/default/dwf8e06fcb/collections/_samsonite/2PC-Family-HS-Set/500x500/149044-0513-GROUP.jpg" }
+   ],
+   "Handbag": [
+     { name: "Evening Handbag", price: 7000, image: "https://i.pinimg.com/736x/b9/c0/98/b9c098c181e9bd55330703da6c95601c.jpg" },
+     { name: "Casual Handbag", price: 5000, image: "https://i.pinimg.com/736x/69/fa/bd/69fabd3b60a18e1820eee4757853514f.jpg" },
+     { name: "Luxury Handbag", price: 11000, image: "https://i.pinimg.com/736x/25/77/b7/2577b7f22ef002a35768454e50a4f5c6.jpg" },
+     { name: "Vintage Handbag", price: 8500, image: "https://i.pinimg.com/736x/ad/58/cd/ad58cd60068306645b546f9ca223d327.jpg" },
+     { name: "Modern Handbag", price: 8500, image: "https://i.pinimg.com/736x/6c/c8/11/6cc8119b584b502e646e58521380c445.jpg" }
+   ],
+   "Backpack": [
+     { name: "School Backpack", price: 6000, image: "https://jansport.com.ph/cdn/shop/files/1000482710_01.jpg?v=1715915245" },
+     { name: "Travel Backpack", price: 7500, image: "https://contents.mediadecathlon.com/p2204688/k$354e0a404ed9e214f8013c7c22f38f11/hiking-backpack-23l-nh-escape-500-quechua-8649339.jpg?f=1920x0&format=auto" },
+     { name: "Laptop Backpack", price: 5500, image: "https://tomtoc.com.ph/cdn/shop/products/HD-11_1800x.jpg?v=1743582676" },
+     { name: "Daypack", price: 67500, image: "https://thetravelclub.ph/cdn/shop/files/1000465298_01.jpg?v=1743071171" },
+     { name: "Hiking Backpack", price: 8500, image: "https://m.media-amazon.com/images/I/71vxRWNnD-L._AC_SL1500_.jpg" }
+   ],
+   "Tote Bag": [
+     { name: "Everyday Totebag", price: 2750, image: "https://attokyo.com.ph/cdn/shop/files/ATS0892_BR_1.jpg?v=1722496025" },
+     { name: "Summer Collection", price: 4250, image: "https://aldoshoes.com.ph/cdn/shop/files/talamaerel_beige_101-002-029_main_sq_nt_1200x1200_72ec6fac-118d-43e8-bd77-deabe7e744ef.jpg?v=1724224288" },
+     { name: "Spring Collection", price: 3750, image: "https://attokyo.com.ph/cdn/shop/files/B-7378KH.jpg?v=1715754692" },
+     { name: "Winter Collection", price: 3500, image: "https://www.montblanc.com/variants/images/1647597320779431/A/w2500.jpg" },
+     { name: "Vintage Classic Totebag", price: 4500, image: "https://www.cln.com.ph/cdn/shop/files/Freya_Black_1.jpg?v=1709257690" }
+   ],
+ };
+
+
+ let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+
+ function save() {
+   localStorage.setItem("cart", JSON.stringify(cart));
+ }
+
+
+ function addcart(product) {
+   cart.push(product);
+   save();
+   renderCart();
+ }
+
+
+ function remove(index) {
+   cart.splice(index, 1);
+   save();
+   renderCart();
+ }
+
+
+ function renderProducts(category) {
+   document.getElementById("categtitle").textContent = category;
+   const productList = document.getElementById("prodli");
+   productList.innerHTML = "";
+   allProducts[category].forEach(product => {
+     const col = document.createElement("div");
+     col.className = "col-md-6 mb-3";
+     col.innerHTML = `
+       <div class="card h-100">
+         <img src="${product.image}" class="card-img-top" alt="${product.name}">
+         <div class="card-body">
+           <h5 class="card-title">${product.name}</h5>
+           <p class="card-text">₱${product.price}</p>
+           <button class="btn btn-success" onclick='addcart(${JSON.stringify(product)})'>Add to Cart</button>
+         </div>
+       </div>
+     `;
+     productList.appendChild(col);
+   });
+ }
+
+
+ function renderCart() {
+   const cartItems = document.getElementById("cartitems");
+   const totalDisplay = document.getElementById("tot");
+   cartItems.innerHTML = "";
+   let tot = 0;
+   cart.forEach((item, index) => {
+     tot += item.price;
+     cartItems.innerHTML += `
+       <div class="d-flex justify-content-between align-items-center mb-2">
+         <div>${item.name} - ₱${item.price}</div>
+         <button class="btn btn-sm btn-danger" onclick="remove(${index})">Remove</button>
+       </div>
+     `;
+   });
+   totalDisplay.textContent = tot;
+ }
+
+
+ function checkout() {
+   const hiddenOrder = document.getElementById("cust_order");
+   const orderToSend = cart.map(item => ({
+     prod_name: item.name,
+     prod_price: item.price
+   }));
+   hiddenOrder.value = JSON.stringify(orderToSend);
+   return true;
+ }
+
+
+ document.querySelectorAll(".category-link").forEach(link => {
+   link.addEventListener("click", (e) => {
+     e.preventDefault();
+     const category = e.target.dataset.category;
+     renderProducts(category);
+   });
+ });
+
+
+ renderProducts("Shoulder Bag");
+ renderCart();
+</script>
+</body>
+</html>
